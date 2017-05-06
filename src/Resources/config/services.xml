@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="routing.loader" class="Umpirsky\I18nRoutingBundle\Routing">
+            <argument type="service" id="controller_name_converter" />
+            <argument type="service" id="routing.resolver" />
+        </service>
+    </services>
+</container>

@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Umpirsky\I18nRoutingBundle
+        psr4_prefix: Umpirsky\I18nRoutingBundle
+        src_path: src
