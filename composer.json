@@ -15,7 +15,8 @@
         "symfony/framework-bundle": "~3.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.3"
+        "phpspec/phpspec": "^3.3",
+        "phpunit/phpunit": "^6.1"
     },
     "autoload": {
         "psr-4": { "Umpirsky\\I18nRoutingBundle\\": "src/" }

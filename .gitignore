@@ -1,3 +1,5 @@
 bin
 composer.lock
 vendor
+tests/fixtures/app/cache
+tests/fixtures/app/logs

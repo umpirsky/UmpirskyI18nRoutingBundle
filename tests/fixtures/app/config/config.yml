@@ -1,0 +1,4 @@
+framework:
+    secret: SecretMyAss
+    router:
+        resource: app/config/routing.yml
