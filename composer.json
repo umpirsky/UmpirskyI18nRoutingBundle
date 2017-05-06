@@ -1,0 +1,31 @@
+{
+    "name": "umpirsky/i18n-routing-bundle",
+    "type": "symfony-bundle",
+    "description": "Internationalized routing with minimal performance cost. ",
+    "keywords": ["routing", "i18n", "internationalisation", "translation", "Symfony"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saša Stamenković",
+            "email": "umpirsky@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "symfony/framework-bundle": "~3.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^3.3"
+    },
+    "autoload": {
+        "psr-4": { "Umpirsky\\I18nRoutingBundle\\": "src/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.1-dev"
+        }
+    }
+}
