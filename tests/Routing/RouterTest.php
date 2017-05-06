@@ -7,12 +7,24 @@ use Symfony\Component\Routing\Router;
 
 class RouterTest extends KernelTestCase
 {
-    public function testI18nRouting()
+    /**
+     * @beforeClass
+     */
+    public static function setUpKernel()
     {
         static::bootKernel();
+    }
 
-        $router = static::$kernel->getContainer()->get('router');
+    public function testI18nRouting()
+    {
+        $router = $this->getService('router');
 
-        $this->assertInstanceOf(Router::class, $router);
+        $this->assertEquals('/blog', $router->getRouteCollection()->get('blog_list')->getPath());
+        $this->assertEquals('/blog/{slug}', $router->getRouteCollection()->get('blog_show')->getPath());
+    }
+
+    private function getService($id)
+    {
+        return static::$kernel->getContainer()->get($id);
     }
 }

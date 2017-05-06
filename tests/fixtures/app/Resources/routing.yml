@@ -1,0 +1,5 @@
+blog_list:
+    path: /blog
+
+blog_show:
+    path: /blog/{slug}
