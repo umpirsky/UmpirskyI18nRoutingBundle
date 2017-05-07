@@ -20,6 +20,13 @@ final class Configuration implements ConfigurationInterface
                         ->requiresAtLeastOneElement()
                         ->prototype('scalar')->end()
                     ->end()
+                    ->scalarNode('strategy')
+                        ->defaultValue('prefix')
+                        ->validate()
+                            ->ifNotInArray(array('prefix', 'prefix_except_default'))
+                            ->thenInvalid('Must be prefix (default) or prefix_except_default')
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
         ;
