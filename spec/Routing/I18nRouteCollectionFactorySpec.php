@@ -19,10 +19,11 @@ class I18nRouteCollectionFactorySpec extends ObjectBehavior
         RouteCollection $routeCollection,
         Route $route
     ) {
+        $i18nRouteFactory->generateName('foo')->shouldBeCalled()->willReturn('foo_i18n');
         $i18nRouteFactory->create($route)->shouldBeCalled()->willReturn($route);
 
+        $routeCollection->getResources()->shouldBeCalled()->willReturn([]);
         $routeCollection->all()->shouldBeCalled()->willReturn(['foo' => $route]);
-        $routeCollection->add('foo_i18n', $route)->shouldBeCalled();
 
         $this->create($routeCollection)->shouldReturnAnInstanceOf(RouteCollection::class);
     }

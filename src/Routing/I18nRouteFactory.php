@@ -13,6 +13,11 @@ class I18nRouteFactory implements I18nRouteFactoryInterface
         $this->localeRequirementGenerator = $localeRequirementGenerator;
     }
 
+    public function generateName(string $name): string
+    {
+        return $name;
+    }
+
     public function create(Route $route): Route
     {
         $i18nRoute = clone $route;

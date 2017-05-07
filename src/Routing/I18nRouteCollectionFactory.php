@@ -17,10 +17,18 @@ class I18nRouteCollectionFactory implements I18nRouteCollectionFactoryInterface
 
     public function create(RouteCollection $routeCollection)
     {
-        foreach ($routeCollection->all() as $name => $route) {
-            $routeCollection->add($name.$this->routeNameSuffix, $this->i18nRouteFactory->create($route));
+        $i18nRouteCollection = new RouteCollection();
+        foreach ($routeCollection->getResources() as $resource) {
+            $i18nRouteCollection->addResource($resource);
         }
 
-        return $routeCollection;
+        foreach ($routeCollection->all() as $name => $route) {
+            $i18nRouteCollection->add(
+                $this->i18nRouteFactory->generateName($name),
+                $this->i18nRouteFactory->create($route)
+            );
+        }
+
+        return $i18nRouteCollection;
     }
 }

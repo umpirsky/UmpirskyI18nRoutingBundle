@@ -15,6 +15,11 @@ class I18nRouteFactorySpec extends ObjectBehavior
         $this->beConstructedWith($localeRequirementGenerator);
     }
 
+    function it_generates_i18n_route_name_based_on_regular_route_name()
+    {
+        $this->generateName('foo')->shouldReturn('foo');
+    }
+
     function it_creates_i18n_route_based_on_regular_route(Route $route)
     {
         $this->create($route)->shouldReturnAnInstanceOf(Route::class);
