@@ -1,8 +1,9 @@
 <?php
 
-namespace Umpirsky\I18nRoutingBundle\Routing;
+namespace Umpirsky\I18nRoutingBundle\Routing\Factory;
 
 use Symfony\Component\Routing\Route;
+use Umpirsky\I18nRoutingBundle\Routing\Generator\LocaleRequirementGeneratorInterface;
 
 class I18nRouteFactory implements I18nRouteFactoryInterface
 {

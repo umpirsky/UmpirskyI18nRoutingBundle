@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Umpirsky\I18nRoutingBundle\Routing;
+namespace spec\Umpirsky\I18nRoutingBundle\Routing\Loader;
 
-use Umpirsky\I18nRoutingBundle\Routing\I18nRouteCollectionFactoryInterface;
+use Umpirsky\I18nRoutingBundle\Routing\Factory\I18nRouteCollectionFactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RouteCollection;

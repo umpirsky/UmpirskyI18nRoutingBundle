@@ -1,9 +1,10 @@
 <?php
 
-namespace Umpirsky\I18nRoutingBundle\Routing;
+namespace Umpirsky\I18nRoutingBundle\Routing\Loader;
 
 use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RouteCollection;
+use Umpirsky\I18nRoutingBundle\Routing\Factory\I18nRouteCollectionFactoryInterface;
 
 class I18nRouteLoader implements I18nRouteLoaderInterface
 {

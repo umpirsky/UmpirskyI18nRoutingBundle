@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Umpirsky\I18nRoutingBundle\Routing;
+namespace spec\Umpirsky\I18nRoutingBundle\Routing\Generator;
 
 use PhpSpec\ObjectBehavior;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Umpirsky\I18nRoutingBundle\Routing;
+namespace Umpirsky\I18nRoutingBundle\Routing\Generator;
 
 class LocaleRequirementGenerator implements LocaleRequirementGeneratorInterface
 {

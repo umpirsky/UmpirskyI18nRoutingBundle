@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Umpirsky\I18nRoutingBundle\Routing;
+namespace spec\Umpirsky\I18nRoutingBundle\Routing\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
-use Umpirsky\I18nRoutingBundle\Routing\I18nRouteFactoryInterface;
+use Umpirsky\I18nRoutingBundle\Routing\Factory\I18nRouteFactoryInterface;
 
 class I18nRouteCollectionFactorySpec extends ObjectBehavior
 {

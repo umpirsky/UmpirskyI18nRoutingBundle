@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Umpirsky\I18nRoutingBundle\Routing;
+namespace spec\Umpirsky\I18nRoutingBundle\Routing\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\Route;
-use Umpirsky\I18nRoutingBundle\Routing\LocaleRequirementGeneratorInterface;
+use Umpirsky\I18nRoutingBundle\Routing\Generator\LocaleRequirementGeneratorInterface;
 
 class I18nRouteFactorySpec extends ObjectBehavior
 {
