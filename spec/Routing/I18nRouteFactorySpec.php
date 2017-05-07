@@ -4,11 +4,11 @@ namespace spec\Umpirsky\I18nRoutingBundle\Routing;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\Route;
-use Umpirsky\I18nRoutingBundle\Routing\LocaleRequirementGenerator;
+use Umpirsky\I18nRoutingBundle\Routing\LocaleRequirementGeneratorInterface;
 
 class I18nRouteFactorySpec extends ObjectBehavior
 {
-    function let(LocaleRequirementGenerator $localeRequirementGenerator)
+    function let(LocaleRequirementGeneratorInterface $localeRequirementGenerator)
     {
         $localeRequirementGenerator->generate()->willReturn('sr|ru|pl');
 

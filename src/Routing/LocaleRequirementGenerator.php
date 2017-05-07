@@ -2,7 +2,7 @@
 
 namespace Umpirsky\I18nRoutingBundle\Routing;
 
-class LocaleRequirementGenerator
+class LocaleRequirementGenerator implements LocaleRequirementGeneratorInterface
 {
     private $locales;
 
