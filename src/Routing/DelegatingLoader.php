@@ -8,15 +8,17 @@ use Symfony\Component\Config\Loader\LoaderResolverInterface;
 
 class DelegatingLoader extends BaseDelegatingLoader
 {
-    public function __construct(I18nLoader $i18nLoader, ControllerNameParser $parser, LoaderResolverInterface $resolver)
+    private $i18nRouteCollectionFactory;
+
+    public function __construct(I18nRouteCollectionFactoryInterface $i18nRouteCollectionFactory, ControllerNameParser $parser, LoaderResolverInterface $resolver)
     {
-        $this->i18nLoader = $i18nLoader;
+        $this->i18nRouteCollectionFactory = $i18nRouteCollectionFactory;
 
         parent::__construct($parser, $resolver);
     }
 
     public function load($resource, $type = null)
     {
-        return $this->i18nLoader->load(parent::load($resource, $type));
+        return $this->i18nRouteCollectionFactory->create(parent::load($resource, $type));
     }
 }
