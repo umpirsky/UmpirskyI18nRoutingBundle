@@ -2,3 +2,6 @@ framework:
     secret: SecretMyAss
     router:
         resource: routing.yml
+
+umpirsky_i18n_routing:
+    locales: [sr, ru, pl]
