@@ -1,14 +1,26 @@
 language: php
 
-php:
-    - 7.0
-    - 7.1
-    - nightly
-
 sudo: false
 
+matrix:
+  include:
+    - php: 7.0
+    - php: 7.1
+    - php: 7.1
+      env: COMPOSER_FLAGS='--prefer-lowest'
+    - php: nightly
+  fast_finish: true
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+env:
+  global:
+    - COMPOSER_FLAGS=''
+
 install:
-    - composer install
+    - composer update $COMPOSER_FLAGS
 
 script:
     - php bin/phpspec run
