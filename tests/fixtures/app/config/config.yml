@@ -5,4 +5,4 @@ framework:
 
 umpirsky_i18n_routing:
     default_locale: en
-    locales: [sr, ru, pl]
+    locales: [en, sr, ru, pl]
