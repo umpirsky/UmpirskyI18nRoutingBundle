@@ -3,7 +3,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="umpirsky_i18n_routing.routing.i18n_route_loader" class="Umpirsky\I18nRoutingBundle\Routing\I18nRouteLoader">
-            <argument type="service" id="routing.loader" />
+            <argument type="service" id="umpirsky_i18n_routing.routing.i18n_route_loader.parent" />
             <argument type="service" id="umpirsky_i18n_routing.routing.i18n_route_collection_factory" />
         </service>
 

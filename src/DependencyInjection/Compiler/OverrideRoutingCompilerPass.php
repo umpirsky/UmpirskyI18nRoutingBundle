@@ -9,6 +9,9 @@ class OverrideRoutingCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
+        $definition = $container->getDefinition('routing.loader');
+        $definition->setPublic(false);
+        $container->setDefinition('umpirsky_i18n_routing.routing.i18n_route_loader.parent', $definition);
         $container->setAlias('routing.loader', 'umpirsky_i18n_routing.routing.i18n_route_loader');
     }
 }

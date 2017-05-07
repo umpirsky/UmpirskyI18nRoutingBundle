@@ -9,6 +9,7 @@ class AppKernel extends Kernel
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new Umpirsky\I18nRoutingBundle\UmpirskyI18nRoutingBundle(),
         ];
     }
 
