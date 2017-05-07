@@ -19,6 +19,7 @@ class UmpirskyI18nRoutingExtension extends Extension
         $loader->load('services.xml');
 
         $container->setParameter('umpirsky_i18n_routing.route_name_suffix', $config['route_name_suffix']);
+        $container->setParameter('umpirsky_i18n_routing.default_locale', $config['default_locale']);
         $container->setParameter('umpirsky_i18n_routing.locales', $config['locales']);
     }
 }

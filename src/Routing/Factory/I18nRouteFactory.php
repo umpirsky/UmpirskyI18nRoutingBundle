@@ -8,10 +8,12 @@ use Umpirsky\I18nRoutingBundle\Routing\Generator\LocaleRequirementGeneratorInter
 class I18nRouteFactory implements I18nRouteFactoryInterface
 {
     private $localeRequirementGenerator;
+    private $defaultLocale;
 
-    public function __construct(LocaleRequirementGeneratorInterface $localeRequirementGenerator)
+    public function __construct(LocaleRequirementGeneratorInterface $localeRequirementGenerator, string $defaultLocale)
     {
         $this->localeRequirementGenerator = $localeRequirementGenerator;
+        $this->defaultLocale = $defaultLocale;
     }
 
     public function generateName(string $name): string
@@ -25,6 +27,7 @@ class I18nRouteFactory implements I18nRouteFactoryInterface
 
         $i18nRoute->setPath(rtrim('/{_locale}'.$route->getPath(), '/'));
         $i18nRoute->setRequirement('_locale', $this->localeRequirementGenerator->generate());
+        $i18nRoute->setDefault('_locale', $this->defaultLocale);
 
         return $i18nRoute;
     }

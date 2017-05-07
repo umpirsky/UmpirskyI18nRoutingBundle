@@ -15,6 +15,7 @@ final class Configuration implements ConfigurationInterface
             ->root('umpirsky_i18n_routing')
                 ->children()
                     ->scalarNode('route_name_suffix')->defaultValue('_i18n')->end()
+                    ->scalarNode('default_locale')->isRequired()->end()
                     ->arrayNode('locales')
                         ->requiresAtLeastOneElement()
                         ->prototype('scalar')->end()

@@ -4,4 +4,5 @@ framework:
         resource: routing.yml
 
 umpirsky_i18n_routing:
+    default_locale: en
     locales: [sr, ru, pl]

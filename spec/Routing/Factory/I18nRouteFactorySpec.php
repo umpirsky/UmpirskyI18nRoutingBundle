@@ -12,7 +12,7 @@ class I18nRouteFactorySpec extends ObjectBehavior
     {
         $localeRequirementGenerator->generate()->willReturn('sr|ru|pl');
 
-        $this->beConstructedWith($localeRequirementGenerator);
+        $this->beConstructedWith($localeRequirementGenerator, 'en');
     }
 
     function it_generates_i18n_route_name_based_on_regular_route_name()
