@@ -37,6 +37,19 @@ umpirsky_i18n_routing:
     locales: [en, sr, ru, pl]
 ```
 
+## Usage
+
+### Disabling i18n routing on route level
+
+If you want route not to be localized, you can disable it using `i18n` option:
+
+```yaml
+foo:
+    path: /foo
+    options:
+        i18n: false
+```
+
 ## Example
 
 There is example integration with [Symfony Standard Edition](https://github.com/umpirsky/symfony-standard/tree/umpirsky/i18n-routing-bundle).
