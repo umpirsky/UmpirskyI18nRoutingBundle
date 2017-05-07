@@ -4,15 +4,10 @@
     <services>
         <service id="umpirsky_i18n_routing.routing.loader.i18n_route_loader" class="Umpirsky\I18nRoutingBundle\Routing\Loader\I18nRouteLoader">
             <argument type="service" id="umpirsky_i18n_routing.routing.loader.i18n_route_loader.parent" />
-            <argument type="service" id="umpirsky_i18n_routing.routing.factory.i18n_route_collection_factory" />
+            <argument type="service" id="umpirsky_i18n_routing.routing.strategy.prefix_strategy" />
         </service>
 
-        <service id="umpirsky_i18n_routing.routing.factory.i18n_route_collection_factory" class="Umpirsky\I18nRoutingBundle\Routing\Factory\I18nRouteCollectionFactory" public="false">
-            <argument type="service" id="umpirsky_i18n_routing.routing.factory.i18n_route_factory" />
-            <argument>%umpirsky_i18n_routing.route_name_suffix%</argument>
-        </service>
-
-        <service id="umpirsky_i18n_routing.routing.factory.i18n_route_factory" class="Umpirsky\I18nRoutingBundle\Routing\Factory\I18nRouteFactory" public="false">
+        <service id="umpirsky_i18n_routing.routing.strategy.prefix_strategy" class="Umpirsky\I18nRoutingBundle\Routing\Strategy\PrefixStrategy" public="false">
             <argument type="service" id="umpirsky_i18n_routing.routing.generator.locale_requirement_generator" />
             <argument>%umpirsky_i18n_routing.default_locale%</argument>
         </service>

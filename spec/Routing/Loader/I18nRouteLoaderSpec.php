@@ -2,26 +2,31 @@
 
 namespace spec\Umpirsky\I18nRoutingBundle\Routing\Loader;
 
-use Umpirsky\I18nRoutingBundle\Routing\Factory\I18nRouteCollectionFactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
+use Umpirsky\I18nRoutingBundle\Routing\Strategy\StrategyInterface;
 
 class I18nRouteLoaderSpec extends ObjectBehavior
 {
-    function let(DelegatingLoader $delegatingLoader, I18nRouteCollectionFactoryInterface $i18nRouteCollectionFactory)
+    function let(DelegatingLoader $delegatingLoader, StrategyInterface $strategy)
     {
-        $this->beConstructedWith($delegatingLoader, $i18nRouteCollectionFactory);
+        $this->beConstructedWith($delegatingLoader, $strategy);
     }
 
     function it_loads_i18n_routes_based_on_regular_routes(
         DelegatingLoader $delegatingLoader,
-        I18nRouteCollectionFactoryInterface $i18nRouteCollectionFactory,
-        RouteCollection $routeCollection
+        StrategyInterface $strategy,
+        RouteCollection $routeCollection,
+        Route $route
     ) {
         $delegatingLoader->load('routing.yml', 'yml')->shouldBeCalled()->willReturn($routeCollection);
-        $i18nRouteCollectionFactory->create($routeCollection)->willReturn($routeCollection);
+        $routeCollection->getResources()->shouldBeCalled()->willReturn([]);
+        $routeCollection->all()->shouldBeCalled()->willReturn(['foo' => $route]);
 
-        $this->load('routing.yml', 'yml')->shouldReturn($routeCollection);
+        $strategy->generate('foo', $route)->willReturn($routeCollection);
+
+        $this->load('routing.yml', 'yml')->shouldReturnAnInstanceOf(RouteCollection::class);
     }
 }
