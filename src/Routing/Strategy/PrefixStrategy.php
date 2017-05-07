@@ -6,17 +6,8 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Umpirsky\I18nRoutingBundle\Routing\Generator\LocaleRequirementGeneratorInterface;
 
-class PrefixStrategy implements StrategyInterface
+class PrefixStrategy extends AbstractStrategy
 {
-    private $localeRequirementGenerator;
-    private $defaultLocale;
-
-    public function __construct(LocaleRequirementGeneratorInterface $localeRequirementGenerator, string $defaultLocale)
-    {
-        $this->localeRequirementGenerator = $localeRequirementGenerator;
-        $this->defaultLocale = $defaultLocale;
-    }
-
     public function generate(string $name, Route $route): RouteCollection
     {
         $collection = new RouteCollection();
