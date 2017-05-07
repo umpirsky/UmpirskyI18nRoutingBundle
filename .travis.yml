@@ -11,4 +11,5 @@ install:
     - composer install
 
 script:
-    - php bin/phpspec
+    - php bin/phpspec run
+    - php bin/phpunit
