@@ -23,6 +23,7 @@ class RouterTest extends KernelTestCase
         $this->assertEquals('en', $router->getRouteCollection()->get('blog_list')->getDefault('_locale'));
         $this->assertEquals('/{_locale}/blog/{slug}', $router->getRouteCollection()->get('blog_show')->getPath());
         $this->assertEquals('en', $router->getRouteCollection()->get('blog_show')->getDefault('_locale'));
+        $this->assertEquals('/blog/{slug}/comments', $router->getRouteCollection()->get('blog_show_comments')->getPath());
     }
 
     private function getService($id)

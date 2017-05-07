@@ -3,3 +3,8 @@ blog_list:
 
 blog_show:
     path: /blog/{slug}
+
+blog_show_comments:
+    path: /blog/{slug}/comments
+    options:
+        i18n: false
