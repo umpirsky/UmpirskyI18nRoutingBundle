@@ -23,6 +23,10 @@ class I18nRouteFactory implements I18nRouteFactoryInterface
 
     public function create(Route $route): Route
     {
+        if (false === $route->getOption('i18n')) {
+            return $route;
+        }
+
         $i18nRoute = clone $route;
 
         $i18nRoute->setPath(rtrim('/{_locale}'.$route->getPath(), '/'));
