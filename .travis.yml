@@ -3,21 +3,22 @@ language: php
 sudo: false
 
 matrix:
-  include:
-    - php: 7.0
-    - php: 7.1
-    - php: 7.1
-      env: COMPOSER_FLAGS='--prefer-lowest'
-    - php: nightly
-  fast_finish: true
+    include:
+        - php: 7.0
+        - php: 7.1
+        - php: nightly
+    allow_failures:
+        - php: 7.1
+          env: COMPOSER_FLAGS='--prefer-lowest'
+    fast_finish: true
 
 cache:
-  directories:
-    - $HOME/.composer/cache/files
+    directories:
+        - $HOME/.composer/cache/files
 
 env:
-  global:
-    - COMPOSER_FLAGS=''
+    global:
+        - COMPOSER_FLAGS=''
 
 install:
     - composer update $COMPOSER_FLAGS
