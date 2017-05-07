@@ -2,9 +2,22 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="routing.loader" class="Umpirsky\I18nRoutingBundle\Routing">
-            <argument type="service" id="controller_name_converter" />
-            <argument type="service" id="routing.resolver" />
+        <service id="umpirsky_i18n_routing.routing.i18n_route_loader" class="Umpirsky\I18nRoutingBundle\Routing\I18nRouteLoader">
+            <argument type="service" id="routing.loader" />
+            <argument type="service" id="umpirsky_i18n_routing.routing.i18n_route_collection_factory" />
+        </service>
+
+        <service id="umpirsky_i18n_routing.routing.i18n_route_collection_factory" class="Umpirsky\I18nRoutingBundle\Routing\I18nRouteCollectionFactory" public="false">
+            <argument type="service" id="umpirsky_i18n_routing.routing.i18n_route_factory" />
+            <argument>%umpirsky_i18n_routing.route_name_suffix%</argument>
+        </service>
+
+        <service id="umpirsky_i18n_routing.routing.i18n_route_factory" class="Umpirsky\I18nRoutingBundle\Routing\I18nRouteFactory" public="false">
+            <argument type="service" id="umpirsky_i18n_routing.routing.locale_requirement_generator" />
+        </service>
+
+        <service id="umpirsky_i18n_routing.routing.locale_requirement_generator" class="Umpirsky\I18nRoutingBundle\Routing\LocaleRequirementGenerator" public="false">
+            <argument>%umpirsky_i18n_routing.locales%</argument>
         </service>
     </services>
 </container>
