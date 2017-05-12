@@ -1,3 +1,6 @@
+homepage:
+    path: /
+
 blog_list:
     path: /blog
 
@@ -8,3 +11,6 @@ blog_show_comments:
     path: /blog/{slug}/comments
     options:
         i18n: false
+
+blog_media:
+    path: /blog/media/

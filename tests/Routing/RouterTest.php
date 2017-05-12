@@ -49,6 +49,10 @@ class RouterTest extends KernelTestCase
         $this->assertEquals('/blog/{slug}', $router->getRouteCollection()->get('blog_show')->getPath());
         $this->assertEquals('/{_locale}/blog/{slug}', $router->getRouteCollection()->get('blog_show_i18n')->getPath());
         $this->assertEquals('/blog/{slug}/comments', $router->getRouteCollection()->get('blog_show_comments')->getPath());
+        $this->assertEquals('/', $router->getRouteCollection()->get('homepage')->getPath());
+        $this->assertEquals('/{_locale}/', $router->getRouteCollection()->get('homepage_i18n')->getPath());
+        $this->assertEquals('/blog/media/', $router->getRouteCollection()->get('blog_media')->getPath());
+        $this->assertEquals('/{_locale}/blog/media/', $router->getRouteCollection()->get('blog_media_i18n')->getPath());
         $this->assertNull($router->getRouteCollection()->get('blog_show_comments_i18n'));
     }
 
