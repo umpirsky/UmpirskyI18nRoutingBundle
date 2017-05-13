@@ -3,18 +3,18 @@
 namespace Umpirsky\I18nRoutingBundle\Tests\Routing;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Routing\Router;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGenerator;
-use Umpirsky\I18nRoutingBundle\Routing\Generator\UrlGenerator as I18nUrlGenerator;
+use Umpirsky\I18nRoutingBundle\Routing\Router as I18nRouter;
 
 class RouterTest extends KernelTestCase
 {
-    public function testUrlGeneratorClassWithPrefixStrategy()
+    public function testRouterClassWithPrefixStrategy()
     {
         static::bootKernel(['environment' => 'prefix']);
 
-        $this->assertInstanceOf(UrlGenerator::class, $this->getService('router')->getGenerator());
-        $this->assertNotInstanceOf(I18nUrlGenerator::class, $this->getService('router')->getGenerator());
+        $this->assertInstanceOf(Router::class, $this->getService('router'));
+        $this->assertNotInstanceOf(I18nRouter::class, $this->getService('router'));
     }
 
     public function testI18nRoutingPathWithPrefixStrategy()
@@ -30,11 +30,11 @@ class RouterTest extends KernelTestCase
         $this->assertEquals('/blog/{slug}/comments', $router->getRouteCollection()->get('blog_show_comments')->getPath());
     }
 
-    public function testUrlGeneratorClassWithPrefixExceptDefaultStrategy()
+    public function testRouterClassWithPrefixExceptDefaultStrategy()
     {
         static::bootKernel(['environment' => 'prefix_except_default']);
 
-        $this->assertInstanceOf(I18nUrlGenerator::class, $this->getService('router')->getGenerator());
+        $this->assertInstanceOf(I18nRouter::class, $this->getService('router'));
     }
 
     public function testI18nRoutingPathWithPrefixExceptDefaultStrategy()

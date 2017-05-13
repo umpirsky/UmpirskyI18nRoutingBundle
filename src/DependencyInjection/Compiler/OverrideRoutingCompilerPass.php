@@ -6,7 +6,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use Umpirsky\I18nRoutingBundle\Routing\Generator\UrlGenerator;
 use Umpirsky\I18nRoutingBundle\Routing\Router;
 
 class OverrideRoutingCompilerPass implements CompilerPassInterface
@@ -15,9 +14,6 @@ class OverrideRoutingCompilerPass implements CompilerPassInterface
     {
         if ('prefix_except_default' === $container->getParameter('umpirsky_i18n_routing.strategy')) {
             $container->getDefinition('router.default')->setClass(Router::class);
-            // TODO: Remove UrlGenerator
-            $container->setParameter('router.options.generator_class', UrlGenerator::class);
-            $container->setParameter('router.options.generator_base_class', UrlGenerator::class);
         }
 
         $routingLoaderDefinition = $container->getDefinition('routing.loader');
