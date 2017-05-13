@@ -44,7 +44,7 @@ class UrlGeneratorSpec extends ObjectBehavior
     {
         $requestContext->hasParameter('_locale')->willReturn(true);
         $requestContext->getParameter('_locale')->willReturn('sr');
-        $routeCollection->get('foo_i18n')->willReturn($route);
+        $routeCollection->get('foo')->willReturn($route);
         $route->compile()->willReturn($compiledRoute);
         $route->getDefaults()->willReturn([]);
         $route->getRequirements()->willReturn([]);

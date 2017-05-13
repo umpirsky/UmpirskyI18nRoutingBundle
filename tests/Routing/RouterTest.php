@@ -17,7 +17,7 @@ class RouterTest extends KernelTestCase
         $this->assertNotInstanceOf(I18nUrlGenerator::class, $this->getService('router')->getGenerator());
     }
 
-    public function testI18nRoutingWithPrefixStrategy()
+    public function testI18nRoutingPathWithPrefixStrategy()
     {
         static::bootKernel(['environment' => 'prefix']);
 
@@ -37,7 +37,7 @@ class RouterTest extends KernelTestCase
         $this->assertInstanceOf(I18nUrlGenerator::class, $this->getService('router')->getGenerator());
     }
 
-    public function testI18nRoutingWithPrefixExceptDefaultStrategy()
+    public function testI18nRoutingPathWithPrefixExceptDefaultStrategy()
     {
         static::bootKernel(['environment' => 'prefix_except_default']);
 
@@ -49,6 +49,15 @@ class RouterTest extends KernelTestCase
         $this->assertEquals('/{_locale}/blog/{slug}', $router->getRouteCollection()->get('blog_show_i18n')->getPath());
         $this->assertEquals('/blog/{slug}/comments', $router->getRouteCollection()->get('blog_show_comments')->getPath());
         $this->assertNull($router->getRouteCollection()->get('blog_show_comments_i18n'));
+    }
+
+    public function testI18nRoutingWithPrefixExceptDefaultStrategy()
+    {
+        static::bootKernel(['environment' => 'prefix_except_default']);
+
+        $router = $this->getService('router');
+
+        // TODO: test generated urls
     }
 
     private function getService($id)
