@@ -1,0 +1,5 @@
+imports:
+    - { resource: config.yml }
+
+umpirsky_i18n_routing:
+    strategy: prefix_except_default
