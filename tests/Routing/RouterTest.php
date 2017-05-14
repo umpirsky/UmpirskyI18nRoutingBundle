@@ -5,6 +5,7 @@ namespace Umpirsky\I18nRoutingBundle\Tests\Routing;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGenerator;
+use Symfony\Component\Routing\RequestContext;
 use Umpirsky\I18nRoutingBundle\Routing\Router as I18nRouter;
 
 class RouterTest extends KernelTestCase
@@ -51,13 +52,31 @@ class RouterTest extends KernelTestCase
         $this->assertNull($router->getRouteCollection()->get('blog_show_comments_i18n'));
     }
 
-    public function testI18nRoutingWithPrefixExceptDefaultStrategy()
+    /**
+     * @dataProvider i18nRoutingWithPrefixExceptDefaultStrategyProvider
+     */
+    public function testI18nRoutingWithPrefixExceptDefaultStrategy($locale)
     {
         static::bootKernel(['environment' => 'prefix_except_default']);
 
-        $router = $this->getService('router');
+        $context = new RequestContext();
+        $context->setParameter('_locale', $locale);
 
-        // TODO: test generated urls
+        $router = $this->getService('router');
+        $router->setContext($context);
+
+        $this->assertEquals($router->generate('blog_list'), sprintf('/%s/blog', $locale));
+        $this->assertEquals($router->generate('blog_show', ['slug' => 'slug']), sprintf('/%s/blog/slug', $locale));
+        $this->assertEquals($router->generate('blog_show_comments', ['slug' => 'slug']), '/blog/slug/comments');
+    }
+
+    public function i18nRoutingWithPrefixExceptDefaultStrategyProvider()
+    {
+        return [
+            ['sr'],
+            ['ru'],
+            ['pl'],
+        ];
     }
 
     private function getService($id)
