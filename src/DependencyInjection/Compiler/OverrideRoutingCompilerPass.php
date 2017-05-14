@@ -13,7 +13,11 @@ class OverrideRoutingCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if ('prefix_except_default' === $container->getParameter('umpirsky_i18n_routing.strategy')) {
-            $container->getDefinition('router.default')->setClass(Router::class);
+            $routerDefinition = $container->getDefinition('router.default');
+            $routerDefinition->setClass(Router::class);
+            $options = $routerDefinition->getArgument(2);
+            $options['i18n_route_name_suffix'] = $container->getParameter('umpirsky_i18n_routing.route_name_suffix');
+            $routerDefinition->replaceArgument(2, $options);
         }
 
         $routingLoaderDefinition = $container->getDefinition('routing.loader');
