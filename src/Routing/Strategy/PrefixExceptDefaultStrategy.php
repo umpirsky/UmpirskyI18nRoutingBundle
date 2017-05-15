@@ -28,7 +28,7 @@ class PrefixExceptDefaultStrategy extends AbstractStrategy
 
         $i18nRoute = clone $route;
 
-        $i18nRoute->setPath(rtrim('/{_locale}'.$route->getPath(), '/'));
+        $i18nRoute->setPath('/{_locale}'.$route->getPath());
         $i18nRoute->setRequirement('_locale', $this->localeRequirementGenerator->generate());
         $collection->add($name.$this->routeNameSuffix, $i18nRoute);
 
