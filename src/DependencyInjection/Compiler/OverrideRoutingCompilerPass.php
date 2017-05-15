@@ -17,6 +17,7 @@ class OverrideRoutingCompilerPass implements CompilerPassInterface
             $routerDefinition->setClass(Router::class);
             $options = $routerDefinition->getArgument(2);
             $options['i18n_route_name_suffix'] = $container->getParameter('umpirsky_i18n_routing.route_name_suffix');
+            $options['i18n_default_locale'] = $container->getParameter('umpirsky_i18n_routing.default_locale');
             $routerDefinition->replaceArgument(2, $options);
         }
 

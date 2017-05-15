@@ -25,7 +25,15 @@ class RouterSpec extends ObjectBehavior
         $requestContext->getBaseUrl()->willReturn('');
         $requestContext->hasParameter('_locale')->willReturn(false);
 
-        $this->beConstructedWith($container, 'routing.yml', ['i18n_route_name_suffix' => '_i18n'], $requestContext);
+        $this->beConstructedWith(
+            $container,
+            'routing.yml',
+            [
+                'i18n_route_name_suffix' => '_i18n',
+                'i18n_default_locale' => 'en',
+            ],
+            $requestContext
+        );
     }
 
     function it_generates_regular_urls(RouteCollection $routeCollection, Route $route, CompiledRoute $compiledRoute)
