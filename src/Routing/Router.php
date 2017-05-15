@@ -23,7 +23,7 @@ class Router extends BaseRouter
         }
 
         $this->routeNameSuffix = $options['i18n_route_name_suffix'];
-        $this->defaultLocale = $options['i18n_route_name_suffix'];
+        $this->defaultLocale = $options['i18n_default_locale'];
         unset($options['i18n_route_name_suffix']);
         unset($options['i18n_default_locale']);
 
