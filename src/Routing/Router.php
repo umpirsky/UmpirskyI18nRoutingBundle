@@ -32,6 +32,12 @@ class Router extends BaseRouter
 
     public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {
+        if (array_key_exists('_locale', $parameters) && $parameters['_locale'] === $this->defaultLocale) {
+            unset($parameters['_locale']);
+
+            return parent::generate($name, $parameters, $referenceType);
+        }
+
         try {
             return $this->generateI18n($name, $parameters, $referenceType);
         } catch (RouteNotFoundException $e) { }
