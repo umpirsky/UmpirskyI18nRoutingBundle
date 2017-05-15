@@ -4,6 +4,7 @@ namespace Umpirsky\I18nRoutingBundle\Tests\Routing;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
 use Umpirsky\I18nRoutingBundle\Routing\Router as I18nRouter;
 
@@ -105,6 +106,38 @@ class RouterTest extends KernelTestCase
             ['sr'],
             ['ru'],
             ['pl'],
+        ];
+    }
+
+    /**
+     * @dataProvider i18nRoutingWithPrefixExceptDefaultStrategyMatchProvider
+     */
+    public function testI18nRoutingWithPrefixExceptDefaultStrategyMatch($uri, $locale, $route)
+    {
+        static::bootKernel(['environment' => 'prefix_except_default']);
+
+        $router = $this->getService('router');
+        $match = $router->match($uri);
+        $requestMatch = $router->matchRequest(Request::create($uri));
+
+        $this->assertArrayHasKey('_locale', $match);
+        $this->assertArrayHasKey('_locale', $requestMatch);
+
+        $this->assertSame($locale, $match['_locale']);
+        $this->assertSame($locale, $requestMatch['_locale']);
+
+        $this->assertArrayHasKey('_route', $match);
+        $this->assertArrayHasKey('_route', $requestMatch);
+
+        $this->assertSame($route, $match['_route']);
+        $this->assertSame($route, $requestMatch['_route']);
+    }
+
+    public function i18nRoutingWithPrefixExceptDefaultStrategyMatchProvider()
+    {
+        return [
+            ['/blog', 'en', 'blog_list'],
+            ['/pl/blog', 'pl', 'blog_list'],
         ];
     }
 
