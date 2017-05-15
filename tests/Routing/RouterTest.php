@@ -4,7 +4,6 @@ namespace Umpirsky\I18nRoutingBundle\Tests\Routing;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\RequestContext;
 use Umpirsky\I18nRoutingBundle\Routing\Router as I18nRouter;
 
@@ -54,6 +53,19 @@ class RouterTest extends KernelTestCase
         $this->assertEquals('/blog/media/', $router->getRouteCollection()->get('blog_media')->getPath());
         $this->assertEquals('/{_locale}/blog/media/', $router->getRouteCollection()->get('blog_media_i18n')->getPath());
         $this->assertNull($router->getRouteCollection()->get('blog_show_comments_i18n'));
+    }
+
+    public function testI18nRoutingWithPrefixExceptDefaultStrategyWithDefault()
+    {
+        static::bootKernel(['environment' => 'prefix_except_default']);
+
+        $context = new RequestContext();
+        $context->setParameter('_locale', 'en');
+
+        $router = $this->getService('router');
+        $router->setContext($context);
+
+        $this->assertEquals($router->generate('blog_list'), '/blog');
     }
 
     /**
