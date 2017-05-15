@@ -68,6 +68,19 @@ class RouterTest extends KernelTestCase
         $this->assertEquals($router->generate('blog_list'), '/blog');
     }
 
+    public function testI18nRoutingWithPrefixExceptDefaultStrategySwitchToDefault()
+    {
+        static::bootKernel(['environment' => 'prefix_except_default']);
+
+        $context = new RequestContext();
+        $context->setParameter('_locale', 'pl');
+
+        $router = $this->getService('router');
+        $router->setContext($context);
+
+        $this->assertEquals($router->generate('blog_list', ['_locale' => 'en']), '/blog');
+    }
+
     /**
      * @dataProvider i18nRoutingWithPrefixExceptDefaultStrategyProvider
      */
