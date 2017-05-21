@@ -20,17 +20,16 @@ class PrefixExceptDefaultStrategy extends AbstractStrategy
     public function generate(string $name, Route $route): RouteCollection
     {
         $collection = new RouteCollection();
-        $collection->add($name, $route);
 
-        if (false === $route->getOption('i18n')) {
-            return $collection;
+        if (false !== $route->getOption('i18n')) {
+            $i18nRoute = clone $route;
+
+            $i18nRoute->setPath('/{_locale}'.$route->getPath());
+            $i18nRoute->setRequirement('_locale', $this->localeRequirementGenerator->generate());
+            $collection->add($name.$this->routeNameSuffix, $i18nRoute);
         }
 
-        $i18nRoute = clone $route;
-
-        $i18nRoute->setPath('/{_locale}'.$route->getPath());
-        $i18nRoute->setRequirement('_locale', $this->localeRequirementGenerator->generate());
-        $collection->add($name.$this->routeNameSuffix, $i18nRoute);
+        $collection->add($name, $route);
 
         return $collection;
     }
