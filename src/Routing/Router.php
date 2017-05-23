@@ -3,6 +3,7 @@
 namespace Umpirsky\I18nRoutingBundle\Routing;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router as BaseRouter;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -57,5 +58,30 @@ class Router extends BaseRouter
         $parameters['_locale'] = array_key_exists('_locale', $parameters) ? $parameters['_locale'] : $this->context->getParameter('_locale');
 
         return parent::generate($name.$this->routeNameSuffix, $parameters, $referenceType);
+    }
+
+    public function match($pathinfo)
+    {
+        return $this->normalizeI18nMatch(parent::match($pathinfo));
+    }
+
+    public function matchRequest(Request $request)
+    {
+        return $this->normalizeI18nMatch(parent::matchRequest($request));
+    }
+
+    private function normalizeI18nMatch(array $parameters)
+    {
+        $i18nPosition = strlen($parameters['_route']) - strlen($this->routeNameSuffix);
+
+        if ($i18nPosition === strpos($parameters['_route'], $this->routeNameSuffix)) {
+            $parameters['_route'] = substr($parameters['_route'], 0, $i18nPosition);
+        }
+
+        if (!array_key_exists('_locale', $parameters)) {
+            $parameters['_locale'] = $this->defaultLocale;
+        }
+
+        return $parameters;
     }
 }
