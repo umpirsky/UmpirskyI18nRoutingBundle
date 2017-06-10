@@ -19,6 +19,7 @@ class RouterSpec extends ObjectBehavior
     {
         $container->get('routing.loader')->willReturn($loader);
         $loader->load('routing.yml', null)->willReturn($routeCollection);
+        $routeCollection->addResource(Argument::any())->willReturn(null);
         $routeCollection->getIterator()->willReturn($routeCollectionIterator);
         $requestContext->getParameters()->willReturn([]);
         $requestContext->getHost()->willReturn(null);
