@@ -2,48 +2,78 @@
 
 namespace Umpirsky\I18nRoutingBundle\Routing;
 
-use Symfony\Bundle\FrameworkBundle\Routing\Router as BaseRouter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use InvalidArgumentException;
+use Symfony\Component\Routing\RouterInterface;
 
-class Router extends BaseRouter
+/**
+ * @author Kevin Bond <kevinbond@gmail.com>
+ */
+class Router implements RouterInterface, RequestMatcherInterface, WarmableInterface
 {
+    private $router;
     private $routeNameSuffix;
     private $defaultLocale;
 
-    public function __construct(ContainerInterface $container, $resource, array $options = [], RequestContext $context = null)
+    public function __construct(RouterInterface $router, string $routeNameSuffix, string $defaultLocale)
     {
-        if (!array_key_exists('i18n_route_name_suffix', $options)) {
-            throw new InvalidArgumentException('Router requires "i18n_route_name_suffix" option.');
-        }
-        if (!array_key_exists('i18n_default_locale', $options)) {
-            throw new InvalidArgumentException('Router requires "i18n_default_locale" option.');
+        if (!$router instanceof RequestMatcherInterface) {
+            throw new \InvalidArgumentException('The wrapped router must implement '.RequestMatcherInterface::class);
         }
 
-        $this->routeNameSuffix = $options['i18n_route_name_suffix'];
-        $this->defaultLocale = $options['i18n_default_locale'];
-        unset($options['i18n_route_name_suffix']);
-        unset($options['i18n_default_locale']);
-
-        parent::__construct($container, $resource, $options, $context);
+        $this->router = $router;
+        $this->routeNameSuffix = $routeNameSuffix;
+        $this->defaultLocale = $defaultLocale;
     }
 
-    public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    public function setContext(RequestContext $context)
+    {
+        $this->router->setContext($context);
+    }
+
+    public function getContext()
+    {
+        return $this->router->getContext();
+    }
+
+    public function getRouteCollection()
+    {
+        return $this->router->getRouteCollection();
+    }
+
+    public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)
     {
         if (array_key_exists('_locale', $parameters) && $parameters['_locale'] === $this->defaultLocale) {
             unset($parameters['_locale']);
 
-            return parent::generate($name, $parameters, $referenceType);
+            return $this->router->generate($name, $parameters, $referenceType);
         }
 
         try {
             return $this->generateI18n($name, $parameters, $referenceType);
         } catch (RouteNotFoundException $e) { }
 
-        return parent::generate($name, $parameters, $referenceType);
+        return $this->router->generate($name, $parameters, $referenceType);
+    }
+
+    public function match($pathinfo)
+    {
+        return $this->normalizeI18nMatch($this->router->match($pathinfo));
+    }
+
+    public function matchRequest(Request $request)
+    {
+        return $this->normalizeI18nMatch($this->router->matchRequest($request));
+    }
+
+    public function warmUp($cacheDir)
+    {
+        if ($this->router instanceof WarmableInterface) {
+            $this->router->warmUp($cacheDir);
+        }
     }
 
     /**
@@ -51,23 +81,13 @@ class Router extends BaseRouter
      */
     private function generateI18n($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {
-        if (!array_key_exists('_locale', $parameters) && (!$this->context->hasParameter('_locale') || $this->defaultLocale === $this->context->getParameter('_locale'))) {
-            return parent::generate($name, $parameters, $referenceType);
+        if (!array_key_exists('_locale', $parameters) && (!$this->getContext()->hasParameter('_locale') || $this->defaultLocale === $this->getContext()->getParameter('_locale'))) {
+            return $this->router->generate($name, $parameters, $referenceType);
         }
 
-        $parameters['_locale'] = array_key_exists('_locale', $parameters) ? $parameters['_locale'] : $this->context->getParameter('_locale');
+        $parameters['_locale'] = array_key_exists('_locale', $parameters) ? $parameters['_locale'] : $this->getContext()->getParameter('_locale');
 
-        return parent::generate($name.$this->routeNameSuffix, $parameters, $referenceType);
-    }
-
-    public function match($pathinfo)
-    {
-        return $this->normalizeI18nMatch(parent::match($pathinfo));
-    }
-
-    public function matchRequest(Request $request)
-    {
-        return $this->normalizeI18nMatch(parent::matchRequest($request));
+        return $this->router->generate($name.$this->routeNameSuffix, $parameters, $referenceType);
     }
 
     private function normalizeI18nMatch(array $parameters)

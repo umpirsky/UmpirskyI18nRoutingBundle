@@ -27,6 +27,7 @@ class UmpirskyI18nRoutingExtension extends Extension
         $container->setParameter('umpirsky_i18n_routing.default_locale', $config['default_locale']);
         if ('prefix_except_default' === $config['strategy']) {
             $config['locales'] = array_diff($config['locales'], [$config['default_locale']]);
+            $loader->load('prefix_except_default.xml');
         }
         $container->setParameter('umpirsky_i18n_routing.locales', $config['locales']);
         $container->setParameter('umpirsky_i18n_routing.strategy', $config['strategy']);
