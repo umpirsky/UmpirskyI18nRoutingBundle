@@ -2,8 +2,12 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="umpirsky_i18n_routing.routing.loader.i18n_route_loader" class="Umpirsky\I18nRoutingBundle\Routing\Loader\I18nRouteLoader">
-            <argument type="service" id="umpirsky_i18n_routing.routing.loader.i18n_route_loader.parent" />
+        <service
+            id="umpirsky_i18n_routing.routing.loader.i18n_route_loader"
+            class="Umpirsky\I18nRoutingBundle\Routing\Loader\I18nRouteLoader"
+            decorates="routing.loader"
+        >
+            <argument type="service" id="umpirsky_i18n_routing.routing.loader.i18n_route_loader.inner" />
         </service>
 
         <service id="umpirsky_i18n_routing.routing.strategy.prefix_strategy" class="Umpirsky\I18nRoutingBundle\Routing\Strategy\PrefixStrategy" public="false">
