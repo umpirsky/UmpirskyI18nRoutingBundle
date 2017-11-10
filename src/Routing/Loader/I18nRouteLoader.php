@@ -7,7 +7,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Routing\RouteCollection;
 use Umpirsky\I18nRoutingBundle\Routing\Strategy\StrategyInterface;
 
-class I18nRouteLoader extends Loader implements I18nRouteLoaderInterface
+class I18nRouteLoader extends Loader
 {
     private $innerLoader;
     private $strategy;
