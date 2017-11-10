@@ -9,18 +9,18 @@ use Umpirsky\I18nRoutingBundle\Routing\Strategy\StrategyInterface;
 
 class I18nRouteLoader implements LoaderInterface
 {
-    private $innerLoader;
+    private $loader;
     private $strategy;
 
-    public function __construct(LoaderInterface $innerLoader, StrategyInterface $strategy)
+    public function __construct(LoaderInterface $loader, StrategyInterface $strategy)
     {
-        $this->innerLoader = $innerLoader;
+        $this->loader = $loader;
         $this->strategy = $strategy;
     }
 
     public function load($resource, $type = null): RouteCollection
     {
-        $routeCollection = $this->innerLoader->load($resource, $type);
+        $routeCollection = $this->loader->load($resource, $type);
 
         $i18nRouteCollection = $this->cloneCollection($routeCollection);
 
@@ -33,17 +33,17 @@ class I18nRouteLoader implements LoaderInterface
 
     public function supports($resource, $type = null): bool
     {
-        return $this->innerLoader->supports($resource, $type);
+        return $this->loader->supports($resource, $type);
     }
 
     public function getResolver()
     {
-        return $this->innerLoader->getResolver();
+        return $this->loader->getResolver();
     }
 
     public function setResolver(LoaderResolverInterface $resolver)
     {
-        $this->innerLoader->setResolver($resolver);
+        $this->loader->setResolver($resolver);
     }
 
     private function cloneCollection(RouteCollection $routeCollection): RouteCollection
