@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="umpirsky_i18n_routing.router"
+            class="Umpirsky\I18nRoutingBundle\Routing\Router"
+            decorates="router"
+        >
+            <argument type="service" id="umpirsky_i18n_routing.router.inner" />
+            <argument>%umpirsky_i18n_routing.route_name_suffix%</argument>
+            <argument>%umpirsky_i18n_routing.default_locale%</argument>
+        </service>
+    </services>
+</container>

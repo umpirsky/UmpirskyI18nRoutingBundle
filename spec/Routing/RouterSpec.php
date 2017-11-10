@@ -2,72 +2,32 @@
 
 namespace spec\Umpirsky\I18nRoutingBundle\Routing;
 
-use Umpirsky\I18nRoutingBundle\Routing\Generator\UrlGenerator;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\CompiledRoute;
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Iterator;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class RouterSpec extends ObjectBehavior
 {
-    function let(ContainerInterface $container, YamlFileLoader $loader, RouteCollection $routeCollection, RequestContext $requestContext, Iterator $routeCollectionIterator)
+    function let(Router $router)
     {
-        $container->get('routing.loader')->willReturn($loader);
-        $loader->load('routing.yml', null)->willReturn($routeCollection);
-        $routeCollection->addResource(Argument::any())->willReturn(null);
-        $routeCollection->getIterator()->willReturn($routeCollectionIterator);
-        $requestContext->getParameters()->willReturn([]);
-        $requestContext->getHost()->willReturn(null);
-        $requestContext->getBaseUrl()->willReturn('');
-        $requestContext->hasParameter('_locale')->willReturn(false);
-
-        $this->beConstructedWith(
-            $container,
-            'routing.yml',
-            [
-                'i18n_route_name_suffix' => '_i18n',
-                'i18n_default_locale' => 'en',
-            ],
-            $requestContext
-        );
+        $this->beConstructedWith($router, '_i18n', 'en');
     }
 
-    function it_generates_regular_urls(RouteCollection $routeCollection, Route $route, CompiledRoute $compiledRoute)
+    function it_generates_regular_urls(Router $router, RequestContext $requestContext)
     {
-        $routeCollection->get('foo')->willReturn($route);
-        $route->compile()->willReturn($compiledRoute);
-        $route->getDefaults()->willReturn([]);
-        $route->getRequirements()->willReturn([]);
-        $route->getSchemes()->willReturn([]);
-        $compiledRoute->getVariables()->willReturn([]);
-        $compiledRoute->getTokens()->willReturn([
-            ['text', '/foo']
-        ]);
-        $compiledRoute->getHostTokens()->willReturn([]);
+        $requestContext->hasParameter('_locale')->willReturn(false);
+        $router->getContext()->willReturn($requestContext);
+        $router->generate('foo', [], Router::ABSOLUTE_PATH)->willReturn('/foo');
 
         $this->generate('foo')->shouldReturn('/foo');
     }
 
-    function it_generates_i18n_urls_when_current_url_is_i18n(RouteCollection $routeCollection, Route $route, CompiledRoute $compiledRoute, RequestContext $requestContext)
+    function it_generates_i18n_urls_when_current_url_is_i18n(Router $router, RequestContext $requestContext)
     {
         $requestContext->hasParameter('_locale')->willReturn(true);
         $requestContext->getParameter('_locale')->willReturn('sr');
-        $routeCollection->get('foo_i18n')->willReturn($route);
-        $route->compile()->willReturn($compiledRoute);
-        $route->getDefaults()->willReturn([]);
-        $route->getRequirements()->willReturn([]);
-        $route->getSchemes()->willReturn([]);
-        $compiledRoute->getVariables()->willReturn(['sr' => '_locale']);
-        $compiledRoute->getTokens()->willReturn([
-            ['text', '/foo'],
-            ['variable', '/', 'sr|ru|pl|de|es|it|mk|fr|gr', '_locale'],
-        ]);
-        $compiledRoute->getHostTokens()->willReturn([]);
+        $router->getContext()->willReturn($requestContext);
+        $router->generate('foo_i18n', ['_locale' => 'sr'], Router::ABSOLUTE_PATH)->willReturn('/sr/foo');
 
         $this->generate('foo')->shouldReturn('/sr/foo');
     }
