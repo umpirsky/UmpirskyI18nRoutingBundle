@@ -2,12 +2,12 @@
 
 namespace Umpirsky\I18nRoutingBundle\Routing\Loader;
 
-use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\Routing\RouteCollection;
 use Umpirsky\I18nRoutingBundle\Routing\Strategy\StrategyInterface;
 
-class I18nRouteLoader extends Loader
+class I18nRouteLoader implements LoaderInterface
 {
     private $innerLoader;
     private $strategy;
@@ -34,6 +34,16 @@ class I18nRouteLoader extends Loader
     public function supports($resource, $type = null): bool
     {
         return $this->innerLoader->supports($resource, $type);
+    }
+
+    public function getResolver()
+    {
+        return $this->innerLoader->getResolver();
+    }
+
+    public function setResolver(LoaderResolverInterface $resolver)
+    {
+        $this->innerLoader->setResolver($resolver);
     }
 
     private function cloneCollection(RouteCollection $routeCollection): RouteCollection
