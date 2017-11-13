@@ -113,4 +113,4 @@ There is example integration with [Symfony Standard Edition](https://github.com/
 
 ## Inspiration
 
-This bundle is inspired by [JMSI18nRoutingBundle](https://github.com/schmittjoh/JMSI18nRoutingBundle) and [BeSimpleI18nRoutingBundle](https://github.com/BeSimple/BeSimpleI18nRoutingBundle).
+This bundle is inspired by [JMSI18nRoutingBundle](https://github.com/schmittjoh/JMSI18nRoutingBundle) and [BeSimpleI18nRoutingBundle](https://github.com/BeSimple/BeSimpleI18nRoutingBundle), but sacrifices the url translation feature for the sake of performance.
