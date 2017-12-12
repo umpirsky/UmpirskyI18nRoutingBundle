@@ -12,15 +12,18 @@
     ],
     "require": {
         "php": "^7.0",
-        "symfony/framework-bundle": "~2.7|~3.0"
+        "symfony/framework-bundle": "~2.7|~3.0|~4.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^3.3",
         "phpunit/phpunit": "^6.1",
-        "symfony/var-dumper": "~2.7|~3.0"
+        "symfony/var-dumper": "~2.7|~3.0|~4.0"
     },
     "autoload": {
         "psr-4": { "Umpirsky\\I18nRoutingBundle\\": "src/" }
+    },
+    "autoload-dev": {
+        "files": ["tests/fixtures/app/AppKernel.php"]
     },
     "config": {
         "bin-dir": "bin"
