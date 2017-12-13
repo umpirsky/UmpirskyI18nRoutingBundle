@@ -15,8 +15,8 @@
         "symfony/framework-bundle": "~2.7|~3.0|~4.0"
     },
     "require-dev": {
+        "symfony/phpunit-bridge": "~4.0",
         "phpspec/phpspec": "^4.2",
-        "phpunit/phpunit": "^6.1",
         "symfony/var-dumper": "~2.7|~3.0|~4.0"
     },
     "autoload": {
