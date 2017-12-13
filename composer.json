@@ -12,11 +12,11 @@
     ],
     "require": {
         "php": "^7.0",
-        "symfony/framework-bundle": "~2.7|~3.0|~4.0"
+        "symfony/framework-bundle": "~2.7.25|~3.0|~4.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.2",
         "phpunit/phpunit": "^6.1",
+        "phpspec/phpspec": "~3.4|~4.2",
         "symfony/var-dumper": "~2.7|~3.0|~4.0"
     },
     "autoload": {
