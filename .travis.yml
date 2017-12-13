@@ -26,4 +26,4 @@ install:
 
 script:
     - php bin/phpspec run
-    - php bin/simple-phpunit
+    - php bin/phpunit
