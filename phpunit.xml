@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true" bootstrap="vendor/autoload.php">
     <php>
-       <server name="KERNEL_DIR" value="tests/fixtures/app" />
-       <server name="KERNEL_CLASS" value="AppKernel" />
+        <server name="KERNEL_DIR" value="tests/fixtures/app" />
+        <server name="KERNEL_CLASS" value="AppKernel" />
+        <server name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=0&amp;max[direct]=0"/>
     </php>
 
     <testsuites>
@@ -21,4 +22,8 @@
             </exclude>
         </whitelist>
     </filter>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+    </listeners>
 </phpunit>
