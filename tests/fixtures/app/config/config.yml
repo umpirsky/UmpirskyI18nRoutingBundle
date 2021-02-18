@@ -1,7 +1,7 @@
 framework:
     secret: SecretMyAss
     router:
-        resource: routing.yml
+        resource: '%kernel.project_dir%/tests/fixtures/app/Resources/routing.yml'
 
 umpirsky_i18n_routing:
     default_locale: en
