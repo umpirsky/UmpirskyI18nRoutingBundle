@@ -16,7 +16,7 @@
 
 Internationalized routing with minimal performance cost.
 
-[![Build Status](https://travis-ci.org/umpirsky/UmpirskyI18nRoutingBundle.svg?branch=master)](https://travis-ci.org/umpirsky/UmpirskyI18nRoutingBundle)
+[![CI](https://github.com/umpirsky/UmpirskyI18nRoutingBundle/actions/workflows/ci.yml/badge.svg)](https://github.com/umpirsky/UmpirskyI18nRoutingBundle/actions/workflows/ci.yml)
 
 ## Idea
 
