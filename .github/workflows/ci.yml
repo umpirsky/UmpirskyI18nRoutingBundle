@@ -40,11 +40,14 @@ jobs:
         env:
           SYMFONY_REQUIRE: ${{ matrix.symfony }}
 
+      - name: Install phpspec
+        run: composer bin phpspec install
+
       - name: Run tests
-        run: bin/phpunit -v
+        run: vendor/bin/simple-phpunit -v
 
       - name: Run phpspec
-        run: bin/phpspec run --format=pretty
+        run: vendor/bin/phpspec run --format=pretty
 
   code-coverage:
     name: Code Coverage
@@ -65,7 +68,7 @@ jobs:
           composer-options: --prefer-dist
 
       - name: Run code coverage
-        run: bin/phpunit -v --coverage-text
+        run: vendor/bin/simple-phpunit -v --coverage-text
 
   composer-validate:
     name: Validate composer.json
