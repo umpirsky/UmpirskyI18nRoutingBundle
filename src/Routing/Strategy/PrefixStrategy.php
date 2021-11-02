@@ -4,7 +4,6 @@ namespace Umpirsky\I18nRoutingBundle\Routing\Strategy;
 
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
-use Umpirsky\I18nRoutingBundle\Routing\Generator\LocaleRequirementGeneratorInterface;
 
 class PrefixStrategy extends AbstractStrategy
 {
