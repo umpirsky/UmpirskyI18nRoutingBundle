@@ -7,18 +7,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('umpirsky_i18n_routing');
 
-        if (method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('umpirsky_i18n_routing');
-        }
-
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
                 ->scalarNode('route_name_suffix')->defaultValue('_i18n')->end()
                 ->scalarNode('default_locale')->isRequired()->end()

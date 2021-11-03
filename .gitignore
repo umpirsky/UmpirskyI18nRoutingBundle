@@ -1,7 +1,8 @@
-bin
-composer.lock
-vendor
-tests/fixtures/app/cache
-tests/fixtures/app/logs
-.php_cs.cache
-var
+/composer.lock
+/vendor
+/tests/fixtures/app/cache
+/tests/fixtures/app/logs
+/.php_cs.cache
+/var
+/bin/tools/*/vendor/
+/bin/tools/*/composer.lock

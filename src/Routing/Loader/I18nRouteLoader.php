@@ -36,12 +36,12 @@ class I18nRouteLoader implements LoaderInterface
         return $this->loader->supports($resource, $type);
     }
 
-    public function getResolver()
+    public function getResolver(): LoaderResolverInterface
     {
         return $this->loader->getResolver();
     }
 
-    public function setResolver(LoaderResolverInterface $resolver)
+    public function setResolver(LoaderResolverInterface $resolver): void
     {
         $this->loader->setResolver($resolver);
     }
