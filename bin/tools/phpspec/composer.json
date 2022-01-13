@@ -1,5 +1,6 @@
 {
     "require": {
-        "phpspec/phpspec": "^6.3|^7.0"
+        "phpspec/phpspec": "^6.3|^7.0",
+        "symfony/service-contracts": "^2.4"
     }
 }

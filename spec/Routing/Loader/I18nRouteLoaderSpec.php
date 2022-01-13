@@ -21,10 +21,11 @@ class I18nRouteLoaderSpec extends ObjectBehavior
         RouteCollection $routeCollection,
         Route $route
     ) {
+        $route->getPath()->willReturn('/foo');
         $delegatingLoader->load('routing.yml', 'yml')->shouldBeCalled()->willReturn($routeCollection);
         $routeCollection->getResources()->shouldBeCalled()->willReturn([]);
         $routeCollection->all()->shouldBeCalled()->willReturn(['foo' => $route]);
-
+        $routeCollection->getAliases()->shouldBeCalled()->willReturn([]);
         $strategy->generate('foo', $route)->willReturn($routeCollection);
 
         $this->load('routing.yml', 'yml')->shouldReturnAnInstanceOf(RouteCollection::class);
