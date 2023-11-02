@@ -11,14 +11,14 @@
         }
     ],
     "require": {
-        "php": "^7.2|^8.0",
-        "symfony/framework-bundle": "^4.4|^5.0|^6.0"
+        "php": "^7.4|^8.0",
+        "symfony/framework-bundle": "^5.4|^6.0|^7.0"
     },
     "require-dev": {
-        "symfony/var-dumper": "^4.4|^5.0|^6.0",
-        "symfony/phpunit-bridge": "^5.3",
-        "bamarni/composer-bin-plugin": "^1.4",
-        "symfony/yaml": "^4.4|^5.0|^6.0"
+        "symfony/var-dumper": "^5.4|^6.0|^7.0",
+        "symfony/phpunit-bridge": "^6.0|^7.0",
+        "symfony/yaml": "^5.0|^6.0|^7.0",
+        "phpunit/phpunit": "^9.6.13"
     },
     "autoload": {
         "psr-4": { "Umpirsky\\I18nRoutingBundle\\": "src/" }
@@ -29,9 +29,6 @@
     "extra": {
         "branch-alias": {
             "dev-master": "0.0.1-dev"
-        },
-        "bamarni-bin": {
-            "target-directory": "bin/tools"
         }
     },
     "minimum-stability": "dev",
