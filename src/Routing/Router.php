@@ -70,7 +70,7 @@ class Router implements RouterInterface, RequestMatcherInterface, WarmableInterf
         return $this->normalizeI18nMatch($this->router->matchRequest($request));
     }
 
-    public function warmUp($cacheDir): array
+    public function warmUp($cacheDir, $buildDir = null): array
     {
         if ($this->router instanceof WarmableInterface) {
             return $this->router->warmUp($cacheDir);

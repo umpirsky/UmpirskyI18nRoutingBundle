@@ -16,7 +16,7 @@ class UmpirskyI18nRoutingExtension extends Extension
         $processor = new Processor();
         $config = $processor->processConfiguration(new Configuration(), $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.xml');
 
         $container->getDefinition('umpirsky_i18n_routing.routing.loader.i18n_route_loader')->addArgument(
